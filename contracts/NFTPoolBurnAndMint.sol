@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.22;
+pragma solidity ^0.8.19;
 
 import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
 import {OwnerIsCreator} from "@chainlink/contracts-ccip/src/v0.8/shared/access/OwnerIsCreator.sol";
@@ -91,6 +91,20 @@ contract NFTPoolBurnAndMint is CCIPReceiver, OwnerIsCreator {
     /// @dev Updates the allowlist status of a sender for transactions.
     function allowlistSender(address _sender, bool allowed) external onlyOwner {
         allowlistedSenders[_sender] = allowed;
+    }
+
+    function burnAndMint(uint256 _tokenId, address newOwner, uint64 destChainSelector, address receiver) public {
+        // verify if the sender is the owner of NFT
+        // comment this because the check is already performed by ERC721
+        // require(wnft.ownerOf(_tokenId) == msg.sender, "you are not the owner of the NFT");
+
+        // transfer NFT to the pool
+        wnft.transferFrom(msg.sender, address(this), _tokenId);
+        // burn the NFT
+        wnft.burn(_tokenId);
+        // send transaction to the destination chain
+        bytes memory payload = abi.encode(_tokenId, newOwner);
+        sendMessagePayLINK(destChainSelector, receiver, payload);
     }
 
     /// @notice Sends data to receiver on the destination chain.
