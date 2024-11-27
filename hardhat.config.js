@@ -7,7 +7,7 @@ require("./task")
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL
-const AMOY_RPC_URL = process.env.AMOY_RPC_URL
+const LINEA_SEPOLIA_RPC_URL = process.env.LINEA_SEPOLIA_RPC_URL
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -30,13 +30,13 @@ module.exports = {
       chainId: 11155111,
       blockConfirmations: 6,
       companionNetworks: {
-        destChain: "amoy"
+        destChain: "linea"
       }
     },
-    amoy: {
-      url: AMOY_RPC_URL,
+    linea: {
+      url: LINEA_SEPOLIA_RPC_URL,
       accounts: [PRIVATE_KEY],
-      chainId: 80002,
+      chainId: 59141,
       blockConfirmations: 6,
       companionNetworks: {
         destChain: "sepolia"

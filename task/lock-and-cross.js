@@ -62,7 +62,7 @@ task("lock-and-cross")
             )
 
         // provide t
-        console.log(`NFT locked and crossed, transaction hash is ${lockAndCrossTx.hash}`)
+        console.log(`NFT locked and crossed, ccip transaction is sent,the tx hash is ${lockAndCrossTx.hash}`)
     })
 
 module.exports = {}

@@ -27,14 +27,14 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     nftAddr = nftTx.address
     log(`NFT address: ${nftAddr}`)
 
-    log("deploying the lmn pool")
+    log("deploying the NFT_Pool_Lock_And_Release pool")
     await deploy("NFTPoolLockAndRelease", {
         contract: "NFTPoolLockAndRelease",
         from: firstAccount,
         log: true,
         args: [sourceChainRouter, linkToken, nftAddr]
     })
-    log("lmn pool deployed")
+    log("NFT_Pool_Lock_And_Release pool deployed")
 }
 
 module.exports.tags = ["sourcechain", "all"]
