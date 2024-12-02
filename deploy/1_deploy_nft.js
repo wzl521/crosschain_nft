@@ -4,7 +4,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const { firstAccount } = await getNamedAccounts()
     const { deploy, log } = deployments
 
-    log("Deploying the nft contract")
+    log("Deploying the nft contract on sourcechain...")
     await deploy("MyToken", {
         contract: "MyToken",
         from: firstAccount,
